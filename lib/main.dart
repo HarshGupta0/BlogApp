@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:subspace/view/Home.dart';
+import 'package:subspace/view/spalshScreen.dart';
 
 void main() {
   runApp( MyApp());
@@ -13,10 +14,25 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  bool showingSplash=true;
+  LoadHome(){
+    Future.delayed(Duration(seconds: 8),(){
+      setState(() {
+        showingSplash=false;
+      });
+    });
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    LoadHome();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Home(),
+      debugShowCheckedModeBanner: false,
+      home:showingSplash ? SplashScreen() : Home(),
     );
   }
 }
