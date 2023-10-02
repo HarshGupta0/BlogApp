@@ -59,27 +59,34 @@ class HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+          backgroundColor: Colors.grey.shade100,
+          appBar:AppBar(
+            backgroundColor: Colors.black87,
+            title: GlithEffect(child: Text('New Blogs'),),
+            centerTitle: true,
+          ),
+            drawer:Text("lolll"),
             body: SingleChildScrollView(
       child: Column(
         children: [
           Container(
             child: Column(
+              // crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // Text(newsModelList[6].newsHead),
-
                 Container(
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
                         margin: EdgeInsets.fromLTRB(15, 25, 0, 0),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            GlithEffect(child: Text(
+                            Center(child: GlithEffect(child: Text(
                               "LATEST NEWS ",
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 28),
-                            ),),
+                            ),),),
                           ],
                         ),
                       ),
