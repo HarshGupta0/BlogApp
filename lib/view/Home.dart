@@ -4,7 +4,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:subspace/model/get_model.dart';
-import 'package:subspace/model/get_model.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -30,7 +29,7 @@ class _HomeState extends State<Home> {
         Map data = jsonDecode(response.body);
         // List blogs=body_data["blogs"];
         setState(() {
-          for (element in data["articles"]) {
+          for (element in data["blogs"]) {
             try {
               i++;
 
@@ -195,7 +194,7 @@ class _HomeState extends State<Home> {
                                                           : newsModelList[index]
                                                               .newsHead,
                                                       style: TextStyle(
-                                                          color: Colors.white,
+                                                          color: Colors.black,
                                                           fontSize: 12),
                                                     )
                                                   ],
