@@ -12,6 +12,8 @@ class Home extends StatefulWidget {
   @override
   State<Home> createState() => HomeState();
 }
+String imgurl='';
+String head='';
 
 class HomeState extends State<Home> {
   bool isLoading = true;
@@ -184,12 +186,14 @@ class HomeState extends State<Home> {
                                         horizontal: 10, vertical: 5),
                                     child: InkWell(
                                       onTap: () {
-                                        // Navigator.push(
-                                        //     context,
-                                        //     MaterialPageRoute(
-                                        //         builder: (context) => NewsView(
-                                        //             newsModelList[index]
-                                        //                 .newsUrl)));
+                                         setState(() {
+                                           imgurl=newsModelList[index].newsImg;
+                                           head=newsModelList[index].newsHead;
+                                         });
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => LargeTab()));
                                       },
                                       child: Card(
                                           shape: RoundedRectangleBorder(
@@ -307,4 +311,58 @@ class HomeState extends State<Home> {
     )));
   }
 }
+class LargeTab extends StatefulWidget {
+  const LargeTab({Key? key}) : super(key: key);
+
+  @override
+  State<LargeTab> createState() => _LargeTabState();
+}
+
+class _LargeTabState extends State<LargeTab> {
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(child: Scaffold(
+   body: Container(
+     child: SingleChildScrollView(
+       child: Column(
+         children: [
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade100,
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(10),
+                      topLeft: Radius.circular(10),
+                      bottomLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10)),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      offset: Offset(1.0, 1.0),
+                      spreadRadius: (1.0),
+                      blurRadius: (1.0),
+                    ),
+                  ],
+                ),
+                width: double.infinity,
+                child: Image.network(imgurl,
+                    fit: BoxFit.fitWidth,
+
+                ),
+              ),
+           Center(
+             child: Container(
+               margin: EdgeInsets.only(right: 20,left: 20,top: 10,bottom: 10),
+             child: Card(
+               child: Text(head),
+             )
+           ),)
+         ],
+       ),
+     ),
+   ),
+    ));
+  }
+}
+
+
 // final user=newsModelList[index];
