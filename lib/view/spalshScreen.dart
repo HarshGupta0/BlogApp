@@ -22,9 +22,11 @@ class SplashScreen extends StatelessWidget {
                 "SubSpace",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 45,
+                  fontSize: 50,
                   color: Colors.black,
                   backgroundColor: Colors.grey.shade50,
+                    fontFamily: 'Acme-Regular',
+                    letterSpacing: 2
                 ),
               ),
             ),
@@ -38,9 +40,11 @@ class SplashScreen extends StatelessWidget {
                "Invest Your Time",
                style: TextStyle(
                  fontWeight: FontWeight.bold,
-                 fontSize: 25,
+                 fontSize: 30,
                  color: Colors.black,
                  backgroundColor: Colors.grey.shade50,
+                 fontFamily: 'Agdasima-Regular',
+                 letterSpacing: 1
                ),
              ),),
             Center(

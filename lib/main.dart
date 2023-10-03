@@ -16,7 +16,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   bool showingSplash=true;
   LoadHome(){
-    Future.delayed(Duration(seconds: 8),(){
+    Future.delayed(Duration(seconds: 5),(){
       setState(() {
         showingSplash=false;
       });

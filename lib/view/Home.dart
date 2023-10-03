@@ -59,13 +59,88 @@ class HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-          backgroundColor: Colors.grey.shade100,
+          backgroundColor: Colors.black38,
           appBar:AppBar(
+            elevation: 1,
             backgroundColor: Colors.black87,
-            title: GlithEffect(child: Text('New Blogs'),),
+            title: GlithEffect(child: Text('New Blogs',style: TextStyle(
+                letterSpacing: 1,
+
+            ),),),
             centerTitle: true,
           ),
-            drawer:Text("lolll"),
+            drawer: Drawer(
+              child: ListView(
+                padding: EdgeInsets.all(0),
+                children: [
+                  DrawerHeader(
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+
+                    ), //BoxDecoration
+                    child: UserAccountsDrawerHeader(
+                      decoration: BoxDecoration(color: Colors.white.withOpacity(.1),
+                      ),
+                      accountName: Text(
+                        "HARSH GUPTA",
+                        style: TextStyle(fontSize: 18),
+                      ),
+                      accountEmail: Text("iharshgupta.2003@gmail.com"),
+                      currentAccountPictureSize: Size.square(50),
+                      currentAccountPicture: CircleAvatar(
+                        backgroundColor: Colors.white.withOpacity(.5),
+                        child: Text(
+                          "H",
+                          style: TextStyle(fontSize: 30.0, color: Colors.black),
+                        ), //Text
+                      ), //circleAvatar
+                    ), //UserAccountDrawerHeader
+                  ), //DrawerHeader
+                  ListTile(
+                    leading: Icon(Icons.person),
+                    title: Text(' My Profile '),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    leading:Icon(Icons.settings),
+                    title:Text('Settings'),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.workspace_premium),
+                    title: Text(' Go Premium '),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    leading:Icon(Icons.video_label),
+                    title: Text(' Saved Blogs '),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    leading:Icon(Icons.edit),
+                    title: Text(' Edit Profile '),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.logout),
+                    title:  Text('LogOut'),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              ),
+            ),
             body: SingleChildScrollView(
       child: Column(
         children: [
@@ -78,18 +153,19 @@ class HomeState extends State<Home> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        margin: EdgeInsets.fromLTRB(15, 25, 0, 0),
+                        margin: EdgeInsets.fromLTRB(15, 15, 0, 0),
                         child: Row(
                            mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Center(child: GlithEffect(child: Text(
                               "LATEST NEWS ",
                               style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 28),
+                                  fontWeight: FontWeight.bold, fontSize: 28,color: Colors.white,fontFamily: 'Acme-Regular',letterSpacing: 2),
                             ),),),
                           ],
                         ),
                       ),
+                      SizedBox(height: 10,),
                       isLoading
                           ? Container(
                               height: MediaQuery.of(context).size.height - 450,
@@ -166,10 +242,11 @@ class HomeState extends State<Home> {
                                                             style: TextStyle(
                                                                 color: Colors
                                                                     .white,
-                                                                fontSize: 18,
+                                                                fontSize: 20,
                                                                 fontWeight:
                                                                     FontWeight
-                                                                        .bold),
+                                                                        .bold,
+                                                            ),
                                                           ),
                                                           Text(
                                                             newsModelList[index]
