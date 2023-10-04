@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:subspace/model/get_model.dart';
@@ -12,7 +13,8 @@ class Home extends StatefulWidget {
   @override
   State<Home> createState() => HomeState();
 }
-
+//globally initializing
+List<NewsQueryModel> newsModelList1 = <NewsQueryModel>[];
 String imgurl = '';
 String head = '';
 
@@ -128,7 +130,11 @@ class HomeState extends State<Home> {
                     leading: Icon(Icons.video_label),
                     title: Text(' Saved Blogs '),
                     onTap: () {
-                      Navigator.pop(context);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  Liked()));
                     },
                   ),
                   ListTile(
@@ -338,7 +344,9 @@ class HomeState extends State<Home> {
                   )
                 ],
               ),
-            )));
+            ),
+        ),
+    );
   }
 }
 
@@ -350,6 +358,7 @@ class LargeTab extends StatefulWidget {
 }
 
 class _LargeTabState extends State<LargeTab> {
+  bool like=false;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -419,7 +428,11 @@ class _LargeTabState extends State<LargeTab> {
               leading: Icon(Icons.video_label),
               title: Text(' Saved Blogs '),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            Liked()));
               },
             ),
             ListTile(
@@ -526,6 +539,21 @@ class _LargeTabState extends State<LargeTab> {
                           "Back",
                           style: TextStyle(color: Colors.white, fontSize: 20),
                         )),
+                    IconButton(
+                        onPressed: (){
+                          setState(() {
+                             like= !like;
+                            if(like){
+                              newsModelList1.add(NewsQueryModel(newsImg:imgurl,newsHead: head));
+                            }else{
+                              newsModelList1.removeLast();
+                            }
+                          });
+                        },
+                      icon: Icon(CupertinoIcons.heart_fill
+                        ,color: like?Colors.red:Colors.white,size: 30,
+                      ),
+                    ),
                   ],
                 ),
               )
@@ -536,5 +564,180 @@ class _LargeTabState extends State<LargeTab> {
     ));
   }
 }
+class Liked extends StatefulWidget {
+  const Liked({Key? key}) : super(key: key);
+
+  @override
+  State<Liked> createState() => _LikedState();
+}
+
+class _LikedState extends State<Liked> {
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(child: Scaffold(
+      backgroundColor: Colors.black,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              child: Column(
+                // crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          margin: EdgeInsets.fromLTRB(15, 15, 0, 0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Center(
+                                child: GlithEffect(
+                                  child: Text(
+                                    "SAVED Blogs ",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 28,
+                                        color: Colors.white,
+                                        fontFamily: 'Acme-Regular',
+                                        letterSpacing: 2),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                             ListView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: newsModelList1.length,
+                            itemBuilder: (context, index) {
+                              try {
+                                return Container(
+                                  margin: EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 5),
+                                  child: InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        imgurl = newsModelList1[index]
+                                            .newsImg;
+                                        head = newsModelList1[index]
+                                            .newsHead;
+                                      });
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  LargeTab()));
+                                    },
+                                    child: Card(
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                            BorderRadius.circular(
+                                                15)),
+                                        elevation: 1.0,
+                                        child: Stack(
+                                          children: [
+                                            ClipRRect(
+                                                borderRadius:
+                                                BorderRadius
+                                                    .circular(15),
+                                                child: Image.network(
+                                                  newsModelList1[index]
+                                                      .newsImg,
+                                                  fit: BoxFit
+                                                      .fitHeight,
+                                                  height: 230,
+                                                  width:
+                                                  double.infinity,
+                                                )),
+                                            Positioned(
+                                                left: 0,
+                                                right: 0,
+                                                bottom: 0,
+                                                child: Container(
+                                                    decoration: BoxDecoration(
+                                                        borderRadius:
+                                                        BorderRadius.circular(
+                                                            15),
+                                                        gradient: LinearGradient(
+                                                            colors: [
+                                                              Colors
+                                                                  .black12
+                                                                  .withOpacity(0),
+                                                              Colors
+                                                                  .black
+                                                            ],
+                                                            begin: Alignment
+                                                                .topCenter,
+                                                            end: Alignment
+                                                                .bottomCenter)),
+                                                    padding:
+                                                    EdgeInsets
+                                                        .fromLTRB(
+                                                        15,
+                                                        15,
+                                                        10,
+                                                        8),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                      CrossAxisAlignment
+                                                          .start,
+                                                      children: [
+                                                        Text(
+                                                          newsModelList1[
+                                                          index]
+                                                              .newsHead,
+                                                          style:
+                                                          TextStyle(
+                                                            color: Colors
+                                                                .white,
+                                                            fontSize:
+                                                            20,
+                                                            fontWeight:
+                                                            FontWeight
+                                                                .bold,
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          newsModelList1[index].newsHead.length >
+                                                              50
+                                                              ? "${newsModelList1[index].newsHead.substring(0, 55)}...."
+                                                              : newsModelList1[index]
+                                                              .newsHead,
+                                                          style: TextStyle(
+                                                              color: Colors
+                                                                  .white,
+                                                              fontSize:
+                                                              12),
+                                                        )
+                                                      ],
+                                                    )))
+                                          ],
+                                        )),
+                                  ),
+                                );
+                              } catch (e) {
+                                print(e);
+                                return Container();
+                              }
+                            }),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    ));
+  }
+}
+
 
 // final user=newsModelList[index];
