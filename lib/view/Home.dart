@@ -17,7 +17,6 @@ class Home extends StatefulWidget {
 List<NewsQueryModel> newsModelList1 = <NewsQueryModel>[];
 String imgurl = '';
 String head = '';
-
 class HomeState extends State<Home> {
   bool isLoading = true;
   List<NewsQueryModel> newsModelList = <NewsQueryModel>[];
@@ -376,82 +375,6 @@ class _LargeTabState extends State<LargeTab> {
         ),
         centerTitle: true,
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.all(0),
-          children: [
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.black,
-              ), //BoxDecoration
-              child: UserAccountsDrawerHeader(
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                ),
-                accountName: Text(
-                  "HARSH GUPTA",
-                  style: TextStyle(fontSize: 18),
-                ),
-                accountEmail: Text("iharshgupta.2003@gmail.com"),
-                currentAccountPictureSize: Size.square(50),
-                currentAccountPicture: CircleAvatar(
-                  backgroundColor: Colors.white.withOpacity(.6),
-                  child: Text(
-                    "H",
-                    style: TextStyle(fontSize: 30.0, color: Colors.black),
-                  ), //Text
-                ), //circleAvatar
-              ), //UserAccountDrawerHeader
-            ), //DrawerHeader
-            ListTile(
-              leading: Icon(Icons.person),
-              title: Text(' My Profile '),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Settings'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.workspace_premium),
-              title: Text(' Go Premium '),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.video_label),
-              title: Text(' Saved Blogs '),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            Liked()));
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.edit),
-              title: Text(' Edit Profile '),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.logout),
-              title: Text('LogOut'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        ),
-      ),
       backgroundColor: Colors.black87,
       body: Container(
         child: SingleChildScrollView(
@@ -575,6 +498,21 @@ class _LikedState extends State<Liked> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(child: Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        centerTitle: true,
+        title:Container(child: GlithEffect(
+          child: Text(
+          "SAVED Blogs ",
+          style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 28,
+              color: Colors.white,
+              fontFamily: 'Acme-Regular',
+              letterSpacing: 2),
+        ),
+      ),) ,
+      ),
       backgroundColor: Colors.black,
       body: SingleChildScrollView(
         child: Column(
@@ -595,7 +533,7 @@ class _LikedState extends State<Liked> {
                               Center(
                                 child: GlithEffect(
                                   child: Text(
-                                    "SAVED Blogs ",
+                                    "Must Read ",
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 28,
@@ -622,11 +560,13 @@ class _LikedState extends State<Liked> {
                                       horizontal: 10, vertical: 5),
                                   child: InkWell(
                                     onTap: () {
+
                                       setState(() {
                                         imgurl = newsModelList1[index]
                                             .newsImg;
                                         head = newsModelList1[index]
                                             .newsHead;
+
                                       });
                                       Navigator.push(
                                           context,
